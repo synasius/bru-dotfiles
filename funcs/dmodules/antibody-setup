@@ -1,0 +1,15 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+antibody-setup() {
+    if (( ! $+commands[antibody] )); then
+        info "Installing antibody"
+        curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
+    fi
+
+    info "compiling antibody plugins"
+    /usr/local/bin/antibody bundle < $DOTFILES/modules/antibody/zsh_plugins.txt > $HOME/.zsh_plugins.sh
+}
+
+antibody-setup "$@"

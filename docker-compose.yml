@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+
+  test:
+    image: bru
+    build: ./
+    working_dir: "/app"
+    command: ["./bru"]
+    volumes:
+      - ./:/app

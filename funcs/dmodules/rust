@@ -1,0 +1,40 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+_cargo() {
+    if [[ -d $HOME/.cargo ]]; then
+        info "cargo already installed"
+
+        # add cargo binary to the env and exit
+        source $HOME/.cargo/env
+        return
+    fi
+
+    info "downloading rustup"
+
+    # Install rust through rustup tool
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+
+    # this adds cargo binary to the current env
+    source $HOME/.cargo/env
+
+    # Installing some useful components
+    rustup component add rls rust-analysis
+}
+
+_ripgrep() {
+    if (( $+commands[rg] )); then
+        info "ripgrep already installed"
+        return
+    fi
+
+    cargo install ripgrep
+}
+
+rust() {
+    _cargo
+    _ripgrep
+}
+
+rust "$@"

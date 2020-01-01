@@ -1,0 +1,9 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+tox-setup() {
+    pip3 install --user --upgrade tox
+}
+
+tox-setup "$@"

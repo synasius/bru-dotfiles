@@ -1,0 +1,69 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+_yarn() {
+    if (( $+commands[yarn] )); then
+        info "yarn already installed"
+        return
+    fi
+
+    info "installing yarn"
+    # install yarn package manager for node
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+    sudo apt-get -q=2 update && sudo apt-get -q=2 install -y --no-install-recommends yarn
+}
+
+_nvm() {
+    if [[ -d "${NVM_DIR}" ]]; then
+        info "nvm already installed. trying to upgrade"
+        (
+          cd "$NVM_DIR"
+          git fetch --tags origin
+          git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+        ) && \. "$NVM_DIR/nvm.sh" --no-use
+    else
+        info "installing nvm"
+        # Install nvm
+        (
+          git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+          cd "$NVM_DIR"
+          git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+        ) && \. "${NVM_DIR}/nvm.sh" --no-use
+
+        info "installing lts/carbon"
+        nvm install lts/carbon
+        info "create alias default"
+        nvm alias default lts/carbon
+    fi
+
+    nvm install lts/carbon
+}
+
+_nvm_packages() {
+    info "installing some usefull global packges"
+    nvm use default
+    # all these packages are needed by neovim
+    if ( yarn global list | grep javascript-typescript-langserver &> /dev/null ); then
+        info 'skipping - global packages installed'
+        return
+    fi
+
+    yarn -s global add javascript-typescript-langserver typescript-language-server neovim tslint typescript
+}
+
+node-setup() {
+    _yarn
+
+    # Deactivate pipefail because nvm_* functions behave in a bad
+    # way when pipefail is active. -_-
+    set +o pipefail
+    _nvm
+    _nvm_packages
+    # Once done we reactivate it
+    set -o pipefail
+}
+
+node-setup "$@"

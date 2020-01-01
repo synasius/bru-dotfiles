@@ -1,0 +1,32 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+_install_package() {
+    local package=$1
+    if ( dpkg -s $package &> /dev/null ); then
+        info "Package $package already installed"
+        return
+    fi
+
+    user "Do you want to install package $package ?"
+    read -r answer
+
+    if [[ $answer == "y" ]]; then
+        sudo apt-get -q=2 install -y $package
+        success "$package installed"
+    fi
+}
+
+utils-setup() {
+    if [[ -v PACKAGES ]]; then
+        for pkg in "$PACKAGES[@]"; do
+            _install_package $pkg
+        done
+    else
+        fail "Variable \$PACKAGES undefined"
+        return 1
+    fi
+}
+
+utils-setup "$@"

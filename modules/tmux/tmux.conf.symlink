@@ -1,0 +1,96 @@
+# vim:foldmethod=marker:foldlevel=0
+
+# remap prefix from 'C-b' to 'C-a'
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# enable move with Ctrl + arrows
+set-window-option -g xterm-keys on
+
+set-option -g mouse on
+
+# don't rename windows automatically
+set-option -g allow-rename off
+
+# this disables the delay in VIM when pressing ESC
+set -s escape-time 0
+
+# reload config file (change file location to your the tmux.conf you want to use)
+bind r source-file ~/.tmux.conf
+
+# enable true color support
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+# Smart pane switching with awareness of Vim splits.
+# See: https://github.com/christoomey/vim-tmux-navigator
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+bind-key -n C-h if-shell "$is_vim" "send-keys C-h"  "select-pane -L"
+bind-key -n C-j if-shell "$is_vim" "send-keys C-j"  "select-pane -D"
+bind-key -n C-k if-shell "$is_vim" "send-keys C-k"  "select-pane -U"
+bind-key -n C-l if-shell "$is_vim" "send-keys C-l"  "select-pane -R"
+bind-key -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
+bind-key -T copy-mode-vi C-h select-pane -L
+bind-key -T copy-mode-vi C-j select-pane -D
+bind-key -T copy-mode-vi C-k select-pane -U
+bind-key -T copy-mode-vi C-l select-pane -R
+bind-key -T copy-mode-vi C-\ select-pane -l
+
+# theme {{{
+
+# loud or quiet?
+set-option -g visual-activity off
+set-option -g visual-bell off
+set-option -g visual-silence off
+set-window-option -g monitor-activity off
+set-option -g bell-action none
+
+set -g default-terminal "screen-256color"
+
+# The modes {{{
+setw -g clock-mode-colour yellow
+setw -g mode-attr bold
+setw -g mode-fg default
+setw -g mode-bg cyan
+# }}}
+
+# The panes {{{
+set -g pane-border-bg default
+set -g pane-border-fg brightblack
+set -g pane-active-border-bg default
+set -g pane-active-border-fg cyan
+# }}}
+
+# The statusbar {{{
+set -g status-position bottom
+set -g status-bg default
+set -g status-fg brightblack
+set -g status-attr dim
+set -g status-left ''
+set -g status-right '#[fg=white,bg=brightblack,bold] %d/%m #[fg=black,bg=white,bold] %H:%M:%S '
+set -g status-right-length 50
+set -g status-left-length 20
+
+setw -g window-status-current-fg blue
+setw -g window-status-current-bg white
+setw -g window-status-current-attr bold
+setw -g window-status-current-format ' #I#[fg=brightblack]:#[fg=black]#W#[fg=magenta]#F '
+
+setw -g window-status-fg white
+setw -g window-status-bg brightblack
+setw -g window-status-attr none
+setw -g window-status-format ' #I#[fg=brightblack]:#[fg=white]#W#[fg=white]#F '
+
+setw -g window-status-bell-attr bold
+setw -g window-status-bell-fg colour255
+setw -g window-status-bell-bg colour1
+# }}}
+
+# The messages {{{
+set -g message-attr bold
+set -g message-fg black
+set -g message-bg white
+# }}}
+
+# }}}

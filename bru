@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+source .b3bp
+
+function _install_package() {
+    local package=$1
+    if ( dpkg -s $package &> /dev/null ); then
+        info "${package} already installed"
+        return
+    fi
+
+    info "install ${package}"
+    sudo apt-get -q=3 install -y $package
+}
+
+info "update system packages"
+sudo apt-get -q=3 update
+_install_package build-essential
+_install_package git
+_install_package zsh
+
+zsh="$(which zsh)"
+test "$(expr "$SHELL" : '.*/\(.*\)')" != "zsh" &&
+    which chsh >/dev/null 2>&1 &&
+    chsh -s "$zsh" &&
+    echo "set $("$zsh" --version) at $zsh as default shell"
+
+# Start main zsh script
+${__dir}/_main
+
+
+

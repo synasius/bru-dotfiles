@@ -1,0 +1,29 @@
+# vim: set filetype=zsh:
+
+_link_file() {
+    if [ -e "$2" ]; then
+        if [ "$(readlink "$2")" = "$1" ]; then
+            info "skipped $1"
+            return 0
+        else
+            mv "$2" "$2.backup"
+            user "moved $2 to $2.backup"
+        fi
+    fi
+    ln -sf "$1" "$2"
+    info "linked $1 to $2"
+}
+
+symlinks() {
+    local dotfiles=$1
+    info 'creating symlinks to dotfiles'
+
+    for src in "$dotfiles"/modules/**/symlink(N); do
+        dst="$HOME/.$(basename "${src%.*}")"
+        _link_file "$src" "$dst"
+    done
+    success 'done creating symlinks'
+}
+functions -Ms symlinks
+
+symlinks "$@"

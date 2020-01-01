@@ -1,0 +1,19 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+docker-setup() {
+    if [[ `groups | grep docker | wc -l` == "1" ]]; then
+        info "skipping - docker group configured"
+        return
+    fi
+
+    # configure docker group to alow non privileged user
+    # to run docker
+    #sudo usermod -aG docker $USER
+
+    # also disable docker daemon at boot
+    #sudo systemctl disable docker
+}
+
+docker-setup "$@"

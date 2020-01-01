@@ -1,0 +1,16 @@
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+visible-name='Default'
+
+[:389a109f-95cc-4bf7-aa9f-01f9b73fca90]
+foreground-color='#EFEFF0F0EBEB'
+bold-color='#EFEFF0F0EBEB'
+allow-bold=true
+palette=['#28282A2A3636', '#FFFF5C5C5757', '#5A5AF7F78E8E', '#F3F3F9F99D9D', '#5757C7C7FFFF', '#FFFF6A6AC1C1', '#9A9AEDEDFEFE', '#F1F1F1F1F0F0', '#686868686868', '#FFFF5C5C5757', '#5A5AF7F78E8E', '#F3F3F9F99D9D', '#5757C7C7FFFF', '#FFFF6A6AC1C1', '#9A9AEDEDFEFE', '#EFEFF0F0EBEB']
+bold-color-same-as-fg=true
+use-theme-colors=false
+visible-name='Snazzy'
+background-color='#28282A2A3636'
+use-theme-background=false
+
+[/]
+list=['389a109f-95cc-4bf7-aa9f-01f9b73fca90']

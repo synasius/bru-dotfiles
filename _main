@@ -1,0 +1,79 @@
+#!/usr/bin/env zsh
+
+# Exit on error. Append "|| true" if you expect an error.
+set -o errexit
+# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
+set -o nounset
+set -o errreturn
+set -o pipefail
+#set -o xtrace
+
+# the current directory is where all the dotfiles are
+DOTFILES=${0%/*}
+
+# the directory where NVM will be installed
+NVM_DIR="$HOME/.nvm"
+
+# Here we load utility functions
+fpath=($DOTFILES/funcs $DOTFILES/funcs/dmodules $fpath)
+autoload -Uz messages; messages
+autoload -Uz gitconfig symlinks modload
+
+gitconfig
+symlinks $DOTFILES
+
+# define modules that need to be run
+dmodules=(
+    utils-setup
+    antibody-setup
+    zprezto
+    gnome-terminal
+    rust
+    node-setup
+    nvim-setup
+    docker-setup
+    mega
+    pipenv-setup
+    tox-setup
+    gcloud-setup
+)
+
+PACKAGES=(
+    apt-transport-https
+    bison
+    ca-certificates
+    clang-format
+    cmake
+    curl
+    dconf-cli
+    docker-compose
+    docker.io
+    flex
+    gnome-tweaks
+    gnupg
+    libpq-dev
+    postgresql-client
+    python3-pip
+    python3-venv
+    software-properties-common
+    tree
+    unzip
+    xclip
+)
+
+SNAP_PACKAGES=(
+)
+
+modload $dmodules
+
+echo    ""
+success "  All installed!"
+
+info "Things to do:"
+info "  1 - Set the font as the monospace font in gnome-tweaks"
+info "  2 - Clone your vault"
+info "  3 - Setup gcloud accounts"
+info "  4 - Login to Megasync account in desktop app"
+info "  5 - Install latest release of gopass: https://github.com/gopasspw/gopass/releases/latest"
+info "  6 - Install qt"
+info "  7 - Install Firefox addons: Multi-Account Container, Facebook Container"

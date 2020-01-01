@@ -1,0 +1,9 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+pipenv-setup() {
+    pip3 install --user --upgrade pipenv
+}
+
+pipenv-setup "$@"

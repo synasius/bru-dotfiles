@@ -1,0 +1,18 @@
+# vim: set filetype=zsh:
+
+# process all modules in input
+modload() {
+    local dmodules=("$argv[@]")
+
+    for mod in "$dmodules[@]"; do
+        info "processing module $mod"
+        autoload -Uz $mod
+
+        if ( $mod ); then
+            success "complete processing of $mod"
+        else
+            fail "errored while processing $mod with code $?"
+            exit 1
+        fi
+    done
+}

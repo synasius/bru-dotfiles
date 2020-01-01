@@ -1,0 +1,47 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+_install_nerd_font() {
+    local font_dir="${HOME}/local/share/fonts"
+    if [[ -d "${font_dir}/NerdFonts" ]]; then
+        info "skipping - nerd fonts already installed"
+        return
+    fi
+
+    info "installing nerd fonts"
+    mkdir -p ${font_dir}
+
+    curl -sLo "/tmp/fonts.zip" "https://git.io/Je2Aw"
+    unzip -qo "/tmp/fonts.zip" -d "${font_dir}/NerdFonts"
+}
+
+gnome-terminal() {
+    _install_nerd_font
+
+    # at the moment I can't think of a better way to tell
+    # whether the color profile has been installed
+    if [[ "$(git config --global --get dotfiles.colorscheme)" == "true" ]]; then
+        info "skipping - terminal scheme already installed"
+        return
+    fi
+
+    info "installing terminal color scheme"
+
+    ## Profile was saved using command:
+    ##   dconf dump /org/gnome/terminal/legacy/profiles:/ > gnome-terminal-profiles.dconf
+    if ( dconf load /org/gnome/terminal/legacy/profiles:/ < $DOTFILES/modules/gnome-terminal/gnome-terminal-profiles.dconf ); then
+        git config --global dotfiles.colorscheme true
+    else
+        warn "errors with dconf"
+    fi
+
+    # install Snazzy color scheme for the gnome terminal from Gohg
+    #if ( bash -c "$(curl -sLo- https://git.io/fxaL7)" ); then
+    #    git config --global dotfiles.colorscheme true
+    #else
+    #    return 1
+    #fi
+}
+
+gnome-terminal "$@"
