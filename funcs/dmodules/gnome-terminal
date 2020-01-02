@@ -3,7 +3,7 @@
 modulename=${0}
 
 _install_nerd_font() {
-    local font_dir="${HOME}/local/share/fonts"
+    local font_dir="${HOME}/.local/share/fonts"
     if [[ -d "${font_dir}/NerdFonts" ]]; then
         info "skipping - nerd fonts already installed"
         return
