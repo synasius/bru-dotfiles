@@ -59,6 +59,7 @@ PACKAGES=(
     tree
     unzip
     xclip
+    tmux
 )
 
 SNAP_PACKAGES=(
