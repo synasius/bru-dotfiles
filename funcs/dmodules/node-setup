@@ -33,13 +33,11 @@ _nvm() {
           git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
         ) && \. "${NVM_DIR}/nvm.sh" --no-use
 
-        info "installing lts/carbon"
-        nvm install lts/carbon
+        info "installing lts/dubnium"
+        nvm install lts/dubnium
         info "create alias default"
-        nvm alias default lts/carbon
+        nvm alias default lts/dubnium
     fi
-
-    nvm install lts/carbon
 }
 
 _nvm_packages() {
