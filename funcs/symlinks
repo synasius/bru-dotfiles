@@ -18,7 +18,7 @@ symlinks() {
     local dotfiles=$1
     info 'creating symlinks to dotfiles'
 
-    for src in "$dotfiles"/modules/**/symlink(N); do
+    for src in "$dotfiles"/modules/**/*.symlink(N); do
         dst="$HOME/.$(basename "${src%.*}")"
         _link_file "$src" "$dst"
     done
