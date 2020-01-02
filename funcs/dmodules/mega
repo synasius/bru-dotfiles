@@ -19,8 +19,8 @@ mega() {
 
     _mega_download
 
-    sudo apt-get install "/tmp/megasync.deb"
-    sudo apt-get install "/tmp/nautilus-megasync.deb"
+    sudo apt-get install -y "/tmp/megasync.deb"
+    sudo apt-get install -y "/tmp/nautilus-megasync.deb"
 }
 
 mega "$@"
