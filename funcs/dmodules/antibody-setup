@@ -5,7 +5,7 @@ modulename=${0}
 antibody-setup() {
     if (( ! $+commands[antibody] )); then
         info "Installing antibody"
-        curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
+        curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
     fi
 
     info "compiling antibody plugins"
