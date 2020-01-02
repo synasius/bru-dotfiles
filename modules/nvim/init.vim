@@ -69,7 +69,7 @@ call plug#end()
 
 " Neovim {{{
 "let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '~/.vim/neovim/bin/python'
+let g:python3_host_prog = '/home/sinasio/.vim/neovim/bin/python'
 " }}}
 
 " Completion {{{

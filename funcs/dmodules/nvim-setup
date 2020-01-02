@@ -67,7 +67,7 @@ nvim-setup() {
     nvm use default
     # Once done we reactivate it
     set -o pipefail
-    /usr/bin/nvim +PlugIntall +qa
+    /usr/bin/nvim +PlugInstall +qa
 }
 
 nvim-setup "$@"
