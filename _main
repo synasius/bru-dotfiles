@@ -52,12 +52,15 @@ PACKAGES=(
     flex
     gnome-tweaks
     gnupg
+    imagemagick
     libglvnd-dev
     libpq-dev
     mesa-common-dev
+    optipng
     postgresql-client
     python3-pip
     python3-venv
+    pngquant
     software-properties-common
     tree
     unzip
