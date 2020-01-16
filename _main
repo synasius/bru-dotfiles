@@ -47,8 +47,8 @@ PACKAGES=(
     cmake
     curl
     dconf-cli
-    docker-compose
     docker.io
+    docker-compose
     flex
     gnome-tweaks
     gnupg

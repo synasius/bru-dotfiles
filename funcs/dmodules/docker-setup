@@ -10,7 +10,7 @@ docker-setup() {
 
     # configure docker group to alow non privileged user
     # to run docker
-    #sudo usermod -aG docker $USER
+    sudo usermod -G docker -a $USER
 
     # also disable docker daemon at boot
     #sudo systemctl disable docker
