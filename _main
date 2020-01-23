@@ -55,6 +55,7 @@ PACKAGES=(
     imagemagick
     libglvnd-dev
     libpq-dev
+    linux-tools-generic
     mesa-common-dev
     optipng
     postgresql-client
@@ -62,6 +63,8 @@ PACKAGES=(
     python3-venv
     pngquant
     software-properties-common
+    steam
+    steam-devices
     tree
     unzip
     xclip
@@ -69,6 +72,10 @@ PACKAGES=(
 )
 
 SNAP_PACKAGES=(
+    libreoffice
+    slack
+    spotify
+    vlc
 )
 
 modload $dmodules
