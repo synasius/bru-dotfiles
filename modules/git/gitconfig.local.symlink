@@ -14,12 +14,15 @@
 [core]
     editor = nvim
 [merge]
-    tool = vimdiff
+    tool = fugitive
 [mergetool]
     prompt = true
+[mergetool "fugitive"]
+    cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [mergetool "vimdiff"]
     cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [difftool]
     prompt = false
 [diff]
+    algorithm = patience
     tool = vimdiff
