@@ -5,6 +5,7 @@ call plug#begin()
 
 " color scheme
 Plug 'mhartington/oceanic-next'
+Plug 'haishanh/night-owl.vim'
 
 " syntax highlighting
 Plug 'rhysd/vim-clang-format'
@@ -43,8 +44,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'machakann/vim-highlightedyank'
 
 " better statusline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 
 " git management plugin
 Plug 'tpope/vim-fugitive'
@@ -109,7 +111,7 @@ endfunction"}}}
 " Colors {{{
 set termguicolors
 syntax enable
-colorscheme OceanicNext
+colorscheme night-owl
 " }}} Colors
 
 " Spaces & Tabs {{{
@@ -126,6 +128,7 @@ set clipboard+=unnamedplus
 " }}} Clipboard
 
 " UI Config {{{
+set noshowmode
 set hidden
 set lcs=trail:·,tab:»·
 set list
@@ -238,7 +241,18 @@ let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 let g:cpp_class_scope_highlight = 1
 " }}}
 
-" Airline {{{
+" Airline && Lightline {{{
+let g:lightline = {
+    \ 'colorscheme': 'nightowl',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'fugitive#head'
+    \ },
+    \ }
+
 let g:airline_theme = 'oceanicnext'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
