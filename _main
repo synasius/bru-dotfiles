@@ -44,6 +44,7 @@ PACKAGES=(
     bison
     ca-certificates
     clang-format
+    clangd
     cmake
     curl
     dconf-cli
@@ -63,6 +64,7 @@ PACKAGES=(
     python3-venv
     pngquant
     software-properties-common
+    sqlite3
     steam
     steam-devices
     tree
