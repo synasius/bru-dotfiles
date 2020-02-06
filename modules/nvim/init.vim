@@ -45,6 +45,7 @@ Plug 'machakann/vim-highlightedyank'
 
 " better statusline
 Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
@@ -138,6 +139,7 @@ set cursorline               " highlight current line
 set wildmenu                 " visual autocomplete for command menu
 set showmatch                " highlight matching brace
 set laststatus=2             " window will always have a status line
+set showtabline=2
 set nobackup
 set noswapfile
 set mouse=a
@@ -243,15 +245,38 @@ let g:cpp_class_scope_highlight = 1
 
 " Airline && Lightline {{{
 let g:lightline = {
-    \ 'colorscheme': 'nightowl',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'colorscheme': 'nightowl',
+    \ 'component': {
+    \   'lineinfo': ' %3l:%-2v',
     \ },
     \ 'component_function': {
-    \   'gitbranch': 'fugitive#head'
+    \   'readonly': 'LightlineReadonly',
+    \   'fugitive': 'LightlineFugitive'
+    \ },
+    \ 'component_expand': {'buffers': 'lightline#bufferline#buffers'},
+    \ 'component_type': {'buffers': 'tabsel'},
+    \ 'tabline': {
+    \   'left': [ [ 'buffers' ] ],
+    \   'right': [ [ ] ],
     \ },
     \ }
+
+function! LightlineReadonly()
+    return &readonly ? '' : ''
+endfunction
+
+function! LightlineFugitive()
+    if exists('*FugitiveHead')
+        let branch = FugitiveHead()
+        return branch !=# '' ? ''.branch : ''
+    endif
+    return ''
+endfunction
+
 
 let g:airline_theme = 'oceanicnext'
 let g:airline_powerline_fonts = 1
