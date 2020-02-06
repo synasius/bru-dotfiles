@@ -78,6 +78,7 @@ SNAP_PACKAGES=(
     slack
     spotify
     vlc
+    telegram-desktop
 )
 
 modload $dmodules
