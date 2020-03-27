@@ -51,6 +51,7 @@ PACKAGES=(
     docker.io
     docker-compose
     flex
+    gimp
     gnome-tweaks
     gnupg
     imagemagick
@@ -74,11 +75,15 @@ PACKAGES=(
 )
 
 SNAP_PACKAGES=(
+    discord
+    drawio
+    helm
     libreoffice
     slack
     spotify
-    vlc
     telegram-desktop
+    vlc
+    youtube-dl
 )
 
 modload $dmodules
@@ -94,3 +99,4 @@ info "  4 - Login to Megasync account in desktop app"
 info "  5 - Install latest release of gopass: https://github.com/gopasspw/gopass/releases/latest"
 info "  6 - Install qt"
 info "  7 - Install Firefox addons: Multi-Account Container, Facebook Container"
+info "  8 - Install Inkscape and Krita app image, appimaged and AppImageUpdate"

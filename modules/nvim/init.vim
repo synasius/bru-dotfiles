@@ -15,9 +15,9 @@ Plug 'sheerun/vim-polyglot'
 " python
 Plug 'psf/black'
 
-Plug 'prettier/vim-prettier', {
-            \ 'do': 'yarn install',
-            \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+"Plug 'prettier/vim-prettier', {
+            "\ 'do': 'yarn install',
+            "\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 
 " auto complete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -85,7 +85,7 @@ set belloff+=ctrlg
 " 'python': ['pyls', '-vv', '--log-file', '~/.pyls.log'],
 let g:LanguageClient_serverCommands = {
             \ 'cpp': ['/usr/bin/clangd'],
-            \ 'python': ['pyls'],
+            \ 'python': ['pyls', '-vv', '--log-file', '~/.pyls.log'],
             \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
             \ 'typescript': ['typescript-language-server', '--stdio'],
             \ 'javascript': ['javascript-typescript-stdio'],
@@ -224,6 +224,7 @@ nnoremap <silent> <leader>m :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> <leader>g :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <leader>h :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 
 " }}}
 
