@@ -1,0 +1,18 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+poetry-setup() {
+    if [[ -f $HOME/.poetry/bin/poetry ]]; then
+        info "skipping - poetry config already installed"
+
+        source $HOME/.poetry/env
+        return
+    fi
+
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+
+    source $HOME/.poetry/env
+}
+
+poetry-setup "$@"

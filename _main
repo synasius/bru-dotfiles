@@ -34,6 +34,7 @@ dmodules=(
     docker-setup
     mega
     pipenv-setup
+    poetry-setup
     tox-setup
     gcloud-setup
 )
@@ -50,15 +51,19 @@ PACKAGES=(
     dconf-cli
     docker.io
     docker-compose
+    firefox-geckodriver
     flex
     gimp
     gnome-tweaks
     gnupg
+    iftop
     imagemagick
+    jpegoptim
     libglvnd-dev
     libpq-dev
     linux-tools-generic
     mesa-common-dev
+    nethogs
     optipng
     postgresql-client
     python3-pip
@@ -71,6 +76,7 @@ PACKAGES=(
     tree
     unzip
     xclip
+    xvfb
     tmux
 )
 
@@ -78,7 +84,6 @@ SNAP_PACKAGES=(
     discord
     drawio
     helm
-    libreoffice
     slack
     spotify
     telegram-desktop
