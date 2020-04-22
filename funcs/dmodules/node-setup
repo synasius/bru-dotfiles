@@ -3,13 +3,13 @@
 modulename=${0}
 
 _yarn() {
+    nvm use default
     if (( $+commands[yarn] )); then
         info "yarn already installed"
         return
     fi
 
     info "installing global yarn"
-    nvm use default
     npm install -g yarn
 }
 
