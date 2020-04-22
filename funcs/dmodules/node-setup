@@ -8,12 +8,9 @@ _yarn() {
         return
     fi
 
-    info "installing yarn"
-    # install yarn package manager for node
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
-    sudo apt-get -q=2 update && sudo apt-get -q=2 install -y --no-install-recommends yarn
+    info "installing global yarn"
+    nvm use default
+    npm install -g yarn
 }
 
 _nvm() {
@@ -49,16 +46,16 @@ _nvm_packages() {
         return
     fi
 
-    yarn -s global add javascript-typescript-langserver typescript-language-server neovim tslint typescript
+    yarn -s global add javascript-typescript-langserver typescript-language-server neovim tslint typescript phantomjs-prebuilt
 }
 
 node-setup() {
-    _yarn
-
     # Deactivate pipefail because nvm_* functions behave in a bad
     # way when pipefail is active. -_-
     set +o pipefail
     _nvm
+    _yarn
+
     _nvm_packages
     # Once done we reactivate it
     set -o pipefail
