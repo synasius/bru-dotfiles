@@ -6,12 +6,12 @@ _mega_download() {
     local baseurl="https://mega.nz/linux/MEGAsync/xUbuntu_19.10/amd64"
 
     info "Download base package"
-    curl -sLo "/tmp/megasync.deb" "${baseurl}/megasync_4.2.5-2.1_amd64.deb"
+    curl -sLo "/tmp/megasync.deb" "${baseurl}/megasync-xUbuntu_19.10_amd64.deb"
     info "Download nautilus package"
-    curl -sLo "/tmp/nautilus-megasync.deb" "${baseurl}/nautilus-megasync_3.6.6_amd64.deb"
+    curl -sLo "/tmp/nautilus-megasync.deb" "${baseurl}/nautilus-megasync-xUbuntu_19.10_amd64.deb"
 }
 
-mega() {
+mega-setup() {
     if (( $+commands[megasync] )); then
         info "skipping - megasync already installed"
         return
@@ -23,4 +23,4 @@ mega() {
     sudo apt-get install -y "/tmp/nautilus-megasync.deb"
 }
 
-mega "$@"
+mega-setup "$@"

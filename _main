@@ -32,7 +32,7 @@ dmodules=(
     node-setup
     nvim-setup
     docker-setup
-    mega
+    mega-setup
     pipenv-setup
     poetry-setup
     tox-setup
