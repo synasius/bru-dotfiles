@@ -13,6 +13,9 @@ _krew() {
       "$KREW" install --manifest=krew.yaml --archive=krew.tar.gz &&
       "$KREW" update
     )
+
+    info "Install resource-capacity plugin"
+    kubectl krew install resource-capacity
 }
 
 gcloud-setup() {
