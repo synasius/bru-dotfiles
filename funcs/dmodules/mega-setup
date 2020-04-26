@@ -3,12 +3,12 @@
 modulename=${0}
 
 _mega_download() {
-    local baseurl="https://mega.nz/linux/MEGAsync/xUbuntu_19.10/amd64"
+    local baseurl="https://mega.nz/linux/MEGAsync/xUbuntu_20.04/amd64"
 
     info "Download base package"
-    curl -sLo "/tmp/megasync.deb" "${baseurl}/megasync-xUbuntu_19.10_amd64.deb"
+    curl -sLo "/tmp/megasync.deb" "${baseurl}/megasync-xUbuntu_20.04_amd64.deb"
     info "Download nautilus package"
-    curl -sLo "/tmp/nautilus-megasync.deb" "${baseurl}/nautilus-megasync-xUbuntu_19.10_amd64.deb"
+    curl -sLo "/tmp/nautilus-megasync.deb" "${baseurl}/nautilus-megasync-xUbuntu_20.04_amd64.deb"
 }
 
 mega-setup() {
