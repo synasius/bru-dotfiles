@@ -13,7 +13,7 @@ Plug 'fedorenchik/qt-support.vim'
 Plug 'sheerun/vim-polyglot'
 
 " python
-Plug 'psf/black'
+Plug 'psf/black', { 'tag': '19.10b0' }  " the tag is needed until https://github.com/psf/black/issues/1293is solved
 
 "Plug 'prettier/vim-prettier', {
             "\ 'do': 'yarn install',
