@@ -6,7 +6,9 @@ local git_lfs_urls=https://api.github.com/repos/git-lfs/git-lfs/releases/latest
 local latest_version=$(curl --silent ${git_lfs_urls} | jq -rc .tag_name)
 
 if (( $+commands[git-lfs] )); then
-    if [[ ${latest_version} == "v2.10.0" ]]; then
+    local current_version=$(git lfs version | sed 's/git-lfs\/\([0-9.]*\) .*/\1/g')
+
+    if [[ ${latest_version} == "v${current_version}" ]]; then
         info "skipping - git lfs installed"
         return
     fi
