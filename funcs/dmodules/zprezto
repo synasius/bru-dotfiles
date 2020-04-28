@@ -3,17 +3,26 @@
 modulename=${0}
 
 zprezto() {
-    if [[ -d "${ZDOTDIR:-$HOME}/.zprezto" ]]; then
+    local prezto_home="${ZDOTDIR:-$HOME}/.zprezto"
+    if [[ -d "${prezto_home}" ]]; then
         info "zprezto directory already exist"
         return
     fi
 
-    git clone --recursive git@github.com:synasius/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    info "cloning repository"
+    git clone --recursive git@github.com:synasius/prezto.git "${prezto_home}"
 
+    info "creating symlinks"
     setopt EXTENDED_GLOB
     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
         ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
     done
+
+    info "adding upstream remote"
+    (
+        cd ${prezto_home}
+        git remote add upstream https://github.com/sorin-ionescu/prezto.git
+    )
 }
 
 zprezto "$@"
