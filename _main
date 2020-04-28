@@ -28,7 +28,7 @@ dmodules=(
     antibody-setup
     zprezto
     gnome-terminal
-    rust
+    rust-setup
     node-setup
     nvim-setup
     docker-setup

@@ -29,7 +29,7 @@ _ripgrep() {
         return
     fi
 
-    cargo install ripgrep xsv dua
+    cargo install ripgrep xsv dua-cli
 }
 
 rust() {
