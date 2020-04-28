@@ -35,6 +35,7 @@ dmodules=(
     mega-setup
     pipenv-setup
     poetry-setup
+    pyenv-setup
     tox-setup
     gcloud-setup
     git-lfs-setup

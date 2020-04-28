@@ -1,0 +1,29 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+pyenv-setup() {
+    if [[ -f $HOME/.pyenv/bin/pyenv ]]; then
+        info "skipping - pyenv config already installed"
+
+        (
+            info "try to upgrade pyenv"
+            cd $HOME/.pyenv &&
+            git pull
+        )
+        return
+    fi
+
+
+    info "pyenv cloning repository"
+    git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv
+
+    info "pyenv installing dependencies for builds"
+    sudo apt-get -q=2 install -y --no-install-recommends \
+        make build-essential libssl-dev zlib1g-dev       \
+        libbz2-dev libreadline-dev libsqlite3-dev wget   \
+        curl llvm libncurses5-dev xz-utils tk-dev        \
+        libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+}
+
+pyenv-setup "$@"
