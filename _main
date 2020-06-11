@@ -28,6 +28,7 @@ dmodules=(
     antibody-setup
     zprezto
     gnome-terminal
+    gopass-setup
     alacritty-setup
     rust-setup
     node-setup
@@ -108,7 +109,6 @@ info "  1 - Set the font as the monospace font in gnome-tweaks"
 info "  2 - Clone your vault"
 info "  3 - Setup gcloud accounts"
 info "  4 - Login to Megasync account in desktop app"
-info "  5 - Install latest release of gopass: https://github.com/gopasspw/gopass/releases/latest"
-info "  6 - Install qt"
-info "  7 - Install Firefox addons: Multi-Account Container, Facebook Container"
-info "  8 - Install Inkscape and Krita app image, appimaged and AppImageUpdate"
+info "  5 - Install qt"
+info "  6 - Install Firefox addons: Multi-Account Container, Facebook Container"
+info "  7 - Install Inkscape and Krita app image, appimaged and AppImageUpdate"

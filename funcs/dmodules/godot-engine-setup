@@ -1,0 +1,29 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+if (( $+commands[godot] )); then
+    info "skipping - godot engine already installed"
+    return
+fi
+
+mkdir -p $HOME/Applications/bin
+
+info "Download godot engine"
+(
+  cd "$(mktemp -d)" &&
+  echo "TODO"
+)
+
+info "Install icons, mimetypes and desktop entry for godot engine"
+(
+  cd "$(mktemp -d)" &&
+  curl -sLO https://raw.githubusercontent.com/godotengine/godot/master/misc/dist/linux/org.godotengine.Godot.desktop &&
+  curl -sLO https://raw.githubusercontent.com/godotengine/godot/master/misc/dist/linux/x-godot-project.xml &&
+  curl -sL https://raw.githubusercontent.com/godotengine/godot/master/icon.png -o godot.png
+
+  xdg-icon-resource install --context mimetypes --size 48 godot.png application-x-godot-project
+  xdg-icon-resource install --context apps --size 48 --novendor godot.png godot
+  xdg-mime install x-godot-project.xml
+  xdg-desktop-icon install ./org.godotengine.Godot.desktop
+)
