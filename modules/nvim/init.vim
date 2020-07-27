@@ -17,10 +17,12 @@ Plug 'psf/black', { 'tag': '19.10b0' }  " the tag is needed until https://github
 
 " auto complete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'autozimu/LanguageClient-neovim', {
-            \ 'branch': 'next',
-            \ 'do': 'bash install.sh',
-            \ }
+Plug 'Shougo/deoplete-lsp'
+"Plug 'autozimu/LanguageClient-neovim', {
+            "\ 'branch': 'next',
+            "\ 'do': 'bash install.sh',
+            "\ }
+Plug 'neovim/nvim-lsp'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
@@ -76,6 +78,10 @@ set completeopt-=preview
 set completeopt+=menuone,noselect,noinsert
 set shortmess+=c
 set belloff+=ctrlg
+
+lua << EOF
+require'nvim_lsp'.pyls.setup{}
+EOF
 
 " To enable logging on the  python language server:
 " 'python': ['pyls', '-vv', '--log-file', '~/.pyls.log'],
@@ -216,11 +222,20 @@ autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
 " LanguageClient mappings
-nnoremap <silent> <leader>m :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> <leader>g :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> <leader>h :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+"nnoremap <silent> <leader>m :call LanguageClient_contextMenu()<CR>
+"nnoremap <silent> <leader>g :call LanguageClient#textDocument_definition()<CR>
+"nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
+"nnoremap <silent> <leader>h :call LanguageClient#textDocument_hover()<CR>
+"nnoremap <silent> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 
 " }}}
 
@@ -312,5 +327,7 @@ augroup stuff
     autocmd BufWritePre *.py execute ':Black'
     autocmd BufRead,BufNewFile *.scss set filetype=scss.css
 augroup END
+
+autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " }}}
