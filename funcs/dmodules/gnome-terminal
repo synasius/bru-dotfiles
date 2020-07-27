@@ -35,13 +35,6 @@ gnome-terminal() {
     else
         warn "errors with dconf"
     fi
-
-    # install Snazzy color scheme for the gnome terminal from Gohg
-    #if ( bash -c "$(curl -sLo- https://git.io/fxaL7)" ); then
-    #    git config --global dotfiles.colorscheme true
-    #else
-    #    return 1
-    #fi
 }
 
 gnome-terminal "$@"
