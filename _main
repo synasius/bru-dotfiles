@@ -99,6 +99,16 @@ SNAP_PACKAGES=(
     youtube-dl
 )
 
+CARGO_PACKAGES=(
+    ripgrep
+    xsv
+    dua-cli
+    starship
+    bat
+    ytop
+    bottom
+)
+
 modload $dmodules
 
 echo    ""
