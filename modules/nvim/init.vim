@@ -27,7 +27,7 @@ Plug 'honza/vim-snippets'
 " navigation/search file
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " editing
@@ -81,7 +81,7 @@ set belloff+=ctrlg
 " 'python': ['pyls', '-vv', '--log-file', '~/.pyls.log'],
 let g:LanguageClient_serverCommands = {
             \ 'cpp': ['/usr/bin/clangd'],
-            \ 'python': ['pyls', '-vv', '--log-file', '~/.pyls.log'],
+            \ 'python': ['pyls', '-vvvv', '--log-file', '~/.pyls.log'],
             \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
             \ 'typescript': ['typescript-language-server', '--stdio'],
             \ 'javascript': ['javascript-typescript-stdio'],
