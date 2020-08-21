@@ -9,7 +9,6 @@ Plug 'haishanh/night-owl.vim'
 
 " syntax highlighting
 Plug 'rhysd/vim-clang-format'
-Plug 'fedorenchik/qt-support.vim'
 Plug 'sheerun/vim-polyglot'
 
 " python
@@ -42,8 +41,6 @@ Plug 'machakann/vim-highlightedyank'
 " better statusline
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 
 " git management plugin
 Plug 'tpope/vim-fugitive'
@@ -71,6 +68,10 @@ call plug#end()
 let g:python3_host_prog = '/home/sinasio/.vim/neovim/bin/python'
 " }}}
 
+" Syntax Highlight {{{
+let g:dart_style_guide = 2
+" }}}
+
 " Completion {{{
 set completeopt-=preview
 set completeopt+=menuone,noselect,noinsert
@@ -78,14 +79,15 @@ set shortmess+=c
 set belloff+=ctrlg
 
 " To enable logging on the  python language server:
-" 'python': ['pyls', '-vv', '--log-file', '~/.pyls.log'],
 let g:LanguageClient_serverCommands = {
             \ 'cpp': ['/usr/bin/clangd'],
             \ 'python': ['pyls', '-vvvv', '--log-file', '~/.pyls.log'],
             \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-            \ 'typescript': ['typescript-language-server', '--stdio'],
             \ 'javascript': ['javascript-typescript-stdio'],
+            \ 'typescript': ['javascript-typescript-stdio'],
             \ 'javascript.jsx': ['javascript-typescript-stdio'],
+            \ 'typescript.tsx': ['javascript-typescript-stdio'],
+            \ 'dart': ['$DART_SDK/dart', "$DART_SDK/snapshots/analysis_server.dart.snapshot", "--lsp"],
             \ }
 let g:LanguageClient_loggingFile = expand('~/.LanguageClient.log')
 
@@ -103,6 +105,7 @@ function! s:check_back_space() abort "{{{
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
 endfunction"}}}
+
 " }}}
 
 " Colors {{{
@@ -215,13 +218,23 @@ map <C-n> :NERDTreeToggle<CR>
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
-" LanguageClient mappings
-nnoremap <silent> <leader>m :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> <leader>g :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> <leader>h :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+function SetLSPShortcuts()
+  nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+  nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+  nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+  nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
+  nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+  nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+  nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+  nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+endfunction()
 
+augroup LSP
+  autocmd!
+  autocmd FileType python,javascript,typescript,rust call SetLSPShortcuts()
+augroup END
 " }}}
 
 " FZF {{{
@@ -274,27 +287,13 @@ function! LightlineFugitive()
     return ''
 endfunction
 
-
-let g:airline_theme = 'oceanicnext'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-" }}}
-
-" Prettier {{{
-let g:prettier#config#single_quote = 'false'
-let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#jsx_bracket_same_line = 'false'
-let g:prettier#config#arrow_parens = 'avoid'
-let g:prettier#config#trailing_comma = 'none'
-let g:prettier#config#parser = 'babylon'
-" }}}
-
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger       = "<c-j>"
 let g:UltiSnipsJumpForwardTrigger  = "<c-b>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
 let g:UltiSnipsListSnippets        = "<c-k>" "List possible snippets based on current file
+
+autocmd BufRead,BufNewFile,BufEnter *.dart UltiSnipsAddFiletypes dart-flutter
 " }}}
 
 " Functions and autos {{{

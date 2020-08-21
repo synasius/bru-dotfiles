@@ -3,13 +3,13 @@
 modulename=${0}
 
 _yarn() {
+    info "installing global yarn"
     nvm use default
     if (( $+commands[yarn] )); then
         info "yarn already installed"
         return
     fi
 
-    info "installing global yarn"
     npm install -g yarn
 }
 
@@ -29,12 +29,12 @@ _nvm() {
           cd "$NVM_DIR"
           git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
         ) && \. "${NVM_DIR}/nvm.sh" --no-use
-
-        info "installing lts/dubnium"
-        nvm install lts/dubnium
-        info "create alias default"
-        nvm alias default lts/dubnium
     fi
+
+    info "installing lts/dubnium"
+    nvm install lts/dubnium
+    info "create alias default"
+    nvm alias default lts/dubnium
 }
 
 _nvm_packages() {
@@ -46,7 +46,7 @@ _nvm_packages() {
         return
     fi
 
-    yarn -s global add javascript-typescript-langserver typescript-language-server neovim tslint typescript phantomjs-prebuilt
+    yarn -s global add javascript-typescript-langserver neovim phantomjs-prebuilt
 }
 
 node-setup() {
