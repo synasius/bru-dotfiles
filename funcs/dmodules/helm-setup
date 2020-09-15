@@ -1,0 +1,14 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+helm-setup() {
+    if (( $+commands[helm] )); then
+        info "skipping - helm already installed"
+        return
+    fi
+
+    sudo snap install helm --classic
+}
+
+helm-setup "$@"

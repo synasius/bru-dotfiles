@@ -40,6 +40,7 @@ dmodules=(
     pyenv-setup
     tox-setup
     gcloud-setup
+    helm-setup
     git-lfs-setup
 )
 
