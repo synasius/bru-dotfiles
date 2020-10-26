@@ -9,6 +9,11 @@ helm-setup() {
     fi
 
     sudo snap install helm --classic
+
+    # Add the official Helm stable repository
+    helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    helm repo add codimd https://helm.codimd.dev/
+    helm repo add datadog https://helm.datadoghq.com
 }
 
 helm-setup "$@"
