@@ -25,13 +25,13 @@ _nvim_config() {
 _nvim_venv() {
     local neovim_venv=${HOME}/.vim/neovim
     if [[ -d ${neovim_venv} ]]; then
-        info "skipping - nvim venv already configured"
-        return
+        info "skipping - nvim venv already exists"
+    else
+        info "creating virtualenv for pynvim in ${neovim_venv}"
+        python3 -m venv ${neovim_venv}
     fi
 
-    info "creating virtualenv for pynvim in ${neovim_venv}"
-    python3 -m venv ${neovim_venv}
-
+    info "try to upgrade pynvim in ${neovim_venv}"
     source ${neovim_venv}/bin/activate
     pip install --upgrade pynvim
     deactivate
