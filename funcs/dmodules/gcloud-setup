@@ -2,9 +2,13 @@
 
 modulename=${0}
 
-
 _krew() {
     info "Installing krew for kubectl plugins"
+
+    if [[ -d $HOME/.krew ]]; then
+        info "skipping - krew already installed"
+        return
+    fi
 
     (
       set -x; cd "$(mktemp -d)" &&
@@ -18,7 +22,7 @@ _krew() {
     kubectl krew install resource-capacity
 }
 
-gcloud-setup() {
+_gcloud() {
     if (( $+commands[gcloud] )); then
         info "skipping - gcloud already installed configured"
         return
@@ -33,6 +37,12 @@ gcloud-setup() {
     info "Update package list and installing gcloud and kubectl"
     # Update the package list and install the Cloud SDK
     sudo apt-get -q=2 update && sudo apt-get -q=2 install -y google-cloud-sdk kubectl
+
+}
+
+gcloud-setup() {
+    _gcloud
+    _krew
 }
 
 gcloud-setup "$@"

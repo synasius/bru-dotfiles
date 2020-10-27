@@ -6,12 +6,12 @@ local gopass_url=https://api.github.com/repos/gopasspw/gopass/releases/latest
 local latest_version=$(curl --silent ${gopass_url} | jq -rc .tag_name)
 
 if (( $+commands[gopass] )); then
-    local current_version=$(gopass --version | sed 's/gopass \([0-9.]+*\) .*/\1/g')
+  local current_version=$(gopass --version | sed 's/gopass \([0-9.]*\)+.*/\1/g')
 
-    if [[ ${latest_version} == "v${current_version}" ]]; then
-        info "skipping - latest gopass installed"
-        return
-    fi
+  if [[ ${latest_version} == "v${current_version}" ]]; then
+    info "skipping - latest gopass installed"
+    return
+  fi
 fi
 
 mkdir -p ${HOME}/.local/bin

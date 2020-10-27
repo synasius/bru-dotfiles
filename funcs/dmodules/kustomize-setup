@@ -1,0 +1,19 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+kustomize-setup() {
+    info "Installing kustomize"
+
+    if (( $+commands[kustomize] )); then
+        info "skipping - kustomize already installed"
+        return
+    fi
+
+    (
+      cd ${HOME}/.local/bin &&
+      curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+    )
+}
+
+kustomize-setup "$@"

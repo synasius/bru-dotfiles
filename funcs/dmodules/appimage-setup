@@ -1,0 +1,24 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+local appimaged_url=https://github.com/AppImage/appimaged/releases/download/continuous/appimaged-x86_64.AppImage
+
+if (( $+commands[appimaged] )); then
+    local current_version=$(gopass --version | sed 's/gopass \([0-9.+abcdef]*\) .*/\1/g')
+
+    if [[ ${latest_version} == "v${current_version}" ]]; then
+        info "skipping - latest gopass installed"
+        return
+    fi
+fi
+
+curl -LO https://github.com/AppImage/appimaged/releases/download/continuous/appimaged-x86_64.AppImage
+
+info "Install appimage version ${latest_version}"
+(
+  cd "$(mktemp -d)" &&
+  curl --silent -LO ${gopass_url} &&
+  chmod a+x appimaged-x86_64.AppImage &&
+  ./appimaged-x86_64.AppImage --install
+)
