@@ -22,6 +22,7 @@ Plug 'autozimu/LanguageClient-neovim', {
             \ }
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'OmniSharp/omnisharp-vim'
 
 " navigation/search file
 Plug 'scrooloose/nerdtree'
@@ -286,6 +287,11 @@ function! LightlineFugitive()
     endif
     return ''
 endfunction
+" }}}
+
+" OmniSharp {{{
+let g:OmniSharp_server_use_mono = 1
+" }}}
 
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger       = "<c-j>"
