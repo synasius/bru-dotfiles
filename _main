@@ -33,6 +33,7 @@ dmodules=(
     rust-setup
     node-setup
     nvim-setup
+    flutter-setup
     docker-setup
     mega-setup
     pipenv-setup

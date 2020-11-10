@@ -1,0 +1,16 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+flutter-setup() {
+    if (( $+commands[flutter] )); then
+        info 'skipping - flutter installed.'
+    else
+        sudo snap install flutter --classic
+        flutter config --android-studio-dir=$HOME/Applications/android-studio/
+    fi
+
+    flutter upgrade
+}
+
+flutter-setup "$@"
