@@ -83,7 +83,7 @@ set belloff+=ctrlg
 let g:LanguageClient_serverCommands = {
             \ 'cpp': ['/usr/bin/clangd'],
             \ 'python': ['pyls', '-vvvv', '--log-file', '~/.pyls.log'],
-            \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+            \ 'rust': ['rust-analyzer'],
             \ 'javascript': ['javascript-typescript-stdio'],
             \ 'typescript': ['javascript-typescript-stdio'],
             \ 'javascript.jsx': ['javascript-typescript-stdio'],
