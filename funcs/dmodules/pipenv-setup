@@ -3,20 +3,14 @@
 modulename=${0}
 
 pipenv-setup() {
-    local latest_version=$(pip3 search pipenv | grep -E '^pipenv ' | sed 's/pipenv (\([0-9.]*\)).*/\1/g')
-
     if (( $+commands[pipenv] )); then
-        # check for version
-        local current_version=$(pipenv --version | sed 's/.* \([0-9.]*\).*/\1/g')
+        info "Pipenv already installed. Trying to upgrade"
 
-        if [[ ${current_version} == ${latest_version} ]]; then
-            info "skipping - latest pipenv already installed"
-            return
-        fi
+        pipx upgrade pipenv
+    else
+        info "Installing Pipenv"
+        pipx install pipenv
     fi
-
-    info "Installing pipenv version ${latest_version}"
-    pip3 install --user --upgrade pipenv
 }
 
 pipenv-setup "$@"

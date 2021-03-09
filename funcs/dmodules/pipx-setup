@@ -1,0 +1,10 @@
+# vim: set filetype=zsh:
+
+modulename=${0}
+
+pipx-setup() {
+    info "installing pipx"
+    python3 -m pip install --user -U pipx
+}
+
+pipx-setup "$@"

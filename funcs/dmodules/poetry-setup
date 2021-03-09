@@ -3,18 +3,16 @@
 modulename=${0}
 
 poetry-setup() {
-    if [[ -f $HOME/.poetry/bin/poetry ]]; then
-        info "skipping - poetry config already installed"
+    if (( $+commands[poetry] )); then
+        info "Poetry already installed. Trying to upgrade"
 
-        source $HOME/.poetry/env
-
-        return
+        pipx upgrade poetry
+    else
+        info "Installing Poetry"
+        pipx install poetry
     fi
 
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3
-
-    source $HOME/.poetry/env
-    poetry completions zsh >! ${HOME}/.zprezto/contrib/poetry/functions/_poetry
+    poetry completions zsh >! ${HOME}/.zprezto/modules/completion/external/src/_poetry
 }
 
 poetry-setup "$@"

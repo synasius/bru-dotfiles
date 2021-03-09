@@ -3,19 +3,14 @@
 modulename=${0}
 
 tox-setup() {
-    local latest_version=$(pip3 search tox | grep -E '^tox ' | sed 's/tox (\([0-9.]*\)).*/\1/g')
-
     if (( $+commands[tox] )); then
-        local current_version=$(tox --version | sed 's/^\([0-9.]*\) .*/\1/g')
+        info "Tox already installed. Trying to upgrade"
 
-        if [[ ${current_version} == ${latest_version} ]]; then
-            info "skipping - latest tox already installed"
-            return
-        fi
+        pipx upgrade tox
+    else
+        info "Installing tox"
+        pipx install tox
     fi
-
-    info "Installing tox version ${latest_version}"
-    pip3 install --user --upgrade tox
 }
 
 tox-setup "$@"

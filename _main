@@ -36,6 +36,7 @@ dmodules=(
     flutter-setup
     docker-setup
     mega-setup
+    pipx-setup
     pipenv-setup
     poetry-setup
     pyenv-setup
